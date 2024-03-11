@@ -11,26 +11,6 @@
 </head>
 
 <body>
-    <!-- <div class="container p-5">
-        <div class="card p-3">
-            <h2 class="text-center card-title">Login</h2>
-            <form class="form card-body">
-                <div class="form-floating m-2">
-                    <input class="form-control" type="text" name="userName" placeholder="Username:">
-                    <label for="userName">Username:</label>
-                </div>
-                <div class="form-floating m-2">
-                    <input class="form-control" type="password" name="password" placeholder="Password:">
-                    <label for="password">Password:</label>
-                </div>
-                <div class="m-2 text-end">
-                    <button class="btn btn-secondary" type="button">Register</button>
-                    <input class="btn btn-primary" type="submit" value="Login">
-                </div>
-            </form>
-        </div>
-    </div> -->
-
     <div class="container text-center">
         <h1 class="">Quiz!</h1>
         <div class="card p-5 m-2">
@@ -42,30 +22,13 @@
                     <p>Questions: </p>
                 </div>
             </div>
-
+            <div class="row" id="feedbackContainer"></div>
             <div class="row">
                 <div class="card col-12 p-4">
                     <h4 id="questionDisplay">This is the question</h4>
                 </div>
             </div>
-
             <div class="mt-3" id="answerDisplay">
-                <div class="row">
-                    <div class="col-6">
-                        <button class="btn btn-primary m-1 px-4 py-3 w-100" type="button" data-choice="0">&square;</button>
-                    </div>
-                    <div class="col-6">
-                        <button class="btn btn-success m-1 px-4 py-3 w-100" type="button" data-choice="1">&triangle;</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <button class="btn btn-danger m-1 px-4 py-3 w-100" type="button" data-choice="2">&cir;</button>
-                    </div>
-                    <div class="col-6">
-                        <button class="btn btn-warning m-1 px-4 py-3 w-100" type="button" data-choice="3">&diam;</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
