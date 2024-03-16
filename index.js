@@ -1,6 +1,4 @@
 // const BOOTSTRAP_COLORS = ["primary", "success", "danger", "warning"];
-
-// // TODO: make it not global?
 const QUESTIONS = [
     {
         "question": "How are you?",
