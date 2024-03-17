@@ -76,13 +76,14 @@ class Quiz {
     }
 
     updateQuestion(isCorrect) {
-        if (gCurrentQuestion >= QUESTIONS.length) {
-            // TODO:endQu iz();
-            return;
-        }
-
         this.score += (isCorrect) ? 1 : 0;
         this.currentQuestion += 1;
+        
+        if (this.currentQuestion >= this.questions.length) {
+            // TODO:endQuiz();
+            return;
+        }
+        debugger;
 
         this.setUpQuestion();
     }
