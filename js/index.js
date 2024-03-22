@@ -19,3 +19,13 @@ const QUESTIONS = [
 
 const quiz1 = new Quiz(QUESTIONS);
 quiz1.start()
+
+
+document.addEventListener("click", (e) => {
+    const action = e.target.dataset.click;
+    if (action == "resetQuiz") {
+        quiz1.resetQuiz()
+        toggleModelOff()
+        document.querySelector("#resetContainer").innerHTML = "";
+    }
+});

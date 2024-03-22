@@ -62,29 +62,29 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 text-center" id="resetContainer">
+        </div>
     </div>
 
     <!-- Modal for when you complete quiz! -->
     <div class="container">
-        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#quizCompleted">
-            Click for Recommendations
-        </button> -->
         <div class="modal fade" id="quizCompleted" tabindex="-1" role="dialog" aria-labelledby="quizCompletedLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="quizCompletedLabel">Based on your search</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                    <div class="modal-header row mx-1">
+                        <h4 class="col-11 modal-title" id="quizCompletedLabel">Quiz Results!</h4>
+                        <button type="button" class="col-1 btn btn-secondary close" data-dismiss="modal" data-click="closeModal"
+                            aria-label="Close">
+                            <span aria-hidden="true" data-click="closeModal">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-
+                    <div class="modal-body" id="quizModalBody">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Show more</button>
+                    <div class="modal-footer mx-1">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            data-click="closeModal">Close</button>
+                        <button type="button" class="btn btn-primary" data-click="resetQuiz">Reset</button>
                     </div>
                 </div>
             </div>
@@ -92,6 +92,7 @@
     </div>
 
 
+    <script src="js/modal.js"></script>
     <script src="js/quiz.js"></script>
     <script src="js/index.js"></script>
 </body>

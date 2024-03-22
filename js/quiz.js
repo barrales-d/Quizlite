@@ -1,31 +1,27 @@
-const animateOpacity = (element, fadeIn = true) => {
+function fadeInOutAnimation(element) {
     const timingSettings = {
-        duration: 300,
+        duration: 1000,
         easing: "ease-out",
         iterations: 1
     };
 
-    keyframes = []
-    if (fadeIn) {
-        keyframes = [{ "opacity": 0 }, { "opacity": 1 }];
-    } else {
-        keyframes = [{ "opacity": 1 }, { "opacity": 0 }];
-    }
+    // element.style.opacity = 1
+    // let opacity = parseInt(element.style.opacity);
+    keyframes = [
+        { "opacity": 1 },
+        { "opacity": 0 }
+    ];
 
-    return element.animate(keyframes, timingSettings);
+    element.animate(keyframes, timingSettings).onfinish = (e) => {
+        e.preventDefault();
+        element.innerHTML = "";
+    };
 };
 
 function showMessage(msg, type) {
     const feedbackContainer = document.getElementById("feedbackContainer");
     feedbackContainer.innerHTML = `<div class = "alert alert-${type}">${msg}</div>`;
-
-    animateOpacity(feedbackContainer).onfinish = (event) => {
-        event.preventDefault();
-        animateOpacity(feedbackContainer, false).onfinish = (event) => {
-            event.preventDefault();
-            feedbackContainer.innerHTML = "";
-        };
-    };
+    fadeInOutAnimation(feedbackContainer);
 }
 
 class Quiz {
@@ -54,13 +50,11 @@ class Quiz {
 
     updateQuestion(isCorrect) {
         this.score += (isCorrect) ? 1 : 0;
-        // this.currentQuestion += 1;
         this.nextQuestion()
 
-        debugger;
         if (this.quizFinished()) {
             // TODO:endQuiz();
-            $('#quizCompleted').modal('toggle');
+            toggleModelOn(this.score, this.questions.length);
             return;
         }
 
@@ -82,6 +76,16 @@ class Quiz {
         return true;
     }
 
+    resetQuiz() {
+        this.questions.forEach((question) => {
+            question.answerChoice = undefined;
+        })
+
+        this.score = 0;
+        this.currentQuestion = 0;
+        this.start()
+    }
+
     // End of Logical Helpers ****************************************
 
     // Render Functions ****************************************
@@ -90,7 +94,7 @@ class Quiz {
 
         let answers = this.questions[this.currentQuestion].possibleAnswers;
         answers.forEach((answer, index) => {
-            let color = "primary";
+            let color = "info";
             const userChoice = this.questions[this.currentQuestion].answerChoice;
             if (userChoice) {
                 if (this.getCorrectAnswer() == userChoice) {
@@ -102,7 +106,7 @@ class Quiz {
 
             answersHTML +=
                 `<div class="col-6">
-                <button class="btn btn-${(userChoice == index) ? color : "primary"} m-1 px-4 py-3 w-100" type="button" data-choice="${index}">
+                <button class="btn btn-${(userChoice == index) ? color : "info"} m-1 px-4 py-3 w-100" type="button" data-choice="${index}">
                     ${answer}
                 </button>
             </div>`;
