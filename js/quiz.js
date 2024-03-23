@@ -5,8 +5,6 @@ function fadeInOutAnimation(element) {
         iterations: 1
     };
 
-    // element.style.opacity = 1
-    // let opacity = parseInt(element.style.opacity);
     keyframes = [
         { "opacity": 1 },
         { "opacity": 0 }
@@ -53,7 +51,6 @@ class Quiz {
         this.nextQuestion()
 
         if (this.quizFinished()) {
-            // TODO:endQuiz();
             toggleModelOn(this.score, this.questions.length, this.getAnswerChoices());
             return;
         }
