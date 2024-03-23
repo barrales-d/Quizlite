@@ -54,7 +54,7 @@ class Quiz {
 
         if (this.quizFinished()) {
             // TODO:endQuiz();
-            toggleModelOn(this.score, this.questions.length);
+            toggleModelOn(this.score, this.questions.length, this.getAnswerChoices());
             return;
         }
 
@@ -86,6 +86,23 @@ class Quiz {
         this.start()
     }
 
+    getAnswerChoices() {
+        // return list of object with variables: questions, isCorrect, answer
+        let answers = []
+        this.questions.forEach((q) => {
+            const isCorrect = (q.correctAnswer == q.answerChoice);
+            let ans = {
+                "question": q.question,
+                "isCorrect": isCorrect,
+                "selectedAnswer": q.possibleAnswers[q.answerChoice]
+            };
+
+            answers.push(ans);
+        });
+
+        return answers;
+    }
+
     // End of Logical Helpers ****************************************
 
     // Render Functions ****************************************
@@ -94,7 +111,9 @@ class Quiz {
 
         let answers = this.questions[this.currentQuestion].possibleAnswers;
         answers.forEach((answer, index) => {
-            let color = "info";
+            let color = "primary";
+            let disabled = false;
+
             const userChoice = this.questions[this.currentQuestion].answerChoice;
             if (userChoice) {
                 if (this.getCorrectAnswer() == userChoice) {
@@ -102,11 +121,13 @@ class Quiz {
                 } else {
                     color = "danger";
                 }
+                disabled = true;
             }
 
             answersHTML +=
                 `<div class="col-6">
-                <button class="btn btn-${(userChoice == index) ? color : "info"} m-1 px-4 py-3 w-100" type="button" data-choice="${index}">
+                <button class="btn btn-${(userChoice == index) ? color : "primary"} m-1 px-4 py-3 w-100"
+                    type="button" data-choice="${index}" ${(disabled) ? "disabled" : ""}>
                     ${answer}
                 </button>
             </div>`;

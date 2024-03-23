@@ -1,7 +1,22 @@
 
-function toggleModelOn(score, total) {
+function toggleModelOn(score, total, answerList) {
     $('#quizCompleted').modal('show');
-    $('#quizModalBody').html(`<p>Final Score: ${score} / ${total}</p>`);
+    let text_style = "h3";
+
+    let questions = `<p class="${text_style}">Final Score: <span class="text-info">${score} / ${total}</span></p>`;
+    questions += "<div class='overflow-y-auto overflow-x-hidden' style='max-height: 300px;'>";
+    questions += "<ol class='list-group mx-2'>";
+    answerList.forEach((ans, index) => {
+        let color = ans.isCorrect ? "success" : "danger";
+        questions += `<li class="list-group-item">
+            <h6 class="mt-2">${index + 1}. ${ans.question}</h6>
+            <p class="py-1 text-${color} border border-${color} rounded">${ans.selectedAnswer}</p>
+        </li>`
+    });
+    questions += "</ol>";
+    questions += "</div>";
+
+    $('#quizModalBody').html(questions);
 }
 
 function toggleModelOff() {
@@ -16,6 +31,6 @@ document.querySelector("#quizCompleted").addEventListener("click", (e) => {
     if (action == "closeModal") {
         toggleModelOff();
         document.querySelector("#resetContainer")
-            .innerHTML = `<button type="button" class="btn btn-dark text-light" data-click="resetQuiz">Reset</button>`;
+            .innerHTML = `<button type="button" class="btn btn-outline-dark w-100" data-click="resetQuiz">Reset</button>`;
     }
 });
