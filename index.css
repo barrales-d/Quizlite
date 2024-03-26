@@ -1,3 +1,21 @@
+/* used to give the  `<`, `>` icons the bootstrap colors  */
 svg {
     color: inherit;
+}
+
+/* pushes the tab to the bottom of the header container */
+.flush-nav {
+    margin-top: auto !important;
+}
+
+.flush-nav>* {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 40em) {
+
+    /* on small screen, it seperates the tabs from the title */
+    .flush-nav {
+        width: 100% !important;
+    }
 }

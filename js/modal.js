@@ -21,16 +21,21 @@ function toggleModelOn(score, total, answerList) {
 
 function toggleModelOff() {
     $('#quizCompleted').modal('hide');
-
     $('#quizModalBody').html("");
 }
 
-document.querySelector("#quizCompleted").addEventListener("click", (e) => {
-    const action = e.target.dataset.click;
+$(document).ready(function () {
 
-    if (action == "closeModal") {
-        toggleModelOff();
+    document.querySelector("#quizCompleted").addEventListener("click", (e) => {
+        const action = e.target.dataset.click;
+
+        if (action == "closeModal") {
+            toggleModelOff();
+        }
+    });
+
+    $('#quizCompleted').on('hide.bs.modal', function (e) {
         document.querySelector("#resetContainer")
             .innerHTML = `<button type="button" class="btn btn-outline-dark w-100" data-click="resetQuiz">Reset</button>`;
-    }
+    });
 });

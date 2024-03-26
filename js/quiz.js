@@ -16,6 +16,7 @@ function fadeInOutAnimation(element) {
     };
 };
 
+// Displays a message to the user which fades out after one second using the funciton above.
 function showMessage(msg, type) {
     const feedbackContainer = document.getElementById("feedbackContainer");
     feedbackContainer.innerHTML = `<div class = "alert alert-${type}">${msg}</div>`;
@@ -23,27 +24,33 @@ function showMessage(msg, type) {
 }
 
 class Quiz {
-    score = 0;
-    currentQuestion = 0;
     // questions should be an array of objects
     // each object should be a question object in this format:
     // {
     //     "question": "How are you?",
     //     "possibleAnswers": ["good", "bad", "fine", "ok"],
     //     "correctAnswer": 0,
-    // }
     //      "answerChoice" will be defined by the quiz class as the user answer questions
+    // }
     constructor(questions) {
         this.questions = questions;
+        this.score = 0;
+        this.currentQuestion = 0;
     }
 
     start() {
+        this.questions.forEach((question) => {
+            question.answerChoice = undefined;
+        })
+
+        this.score = 0;
+        this.currentQuestion = 0;
         this.setUpQuestion();
     }
 
     setUpQuestion() {
         this.displayCurrentQuestion();
-        this.setEventListener();
+        this.setEventListeners();
     }
 
     updateQuestion(isCorrect) {
@@ -55,6 +62,7 @@ class Quiz {
             return;
         }
 
+        this.removeEventListeners();
         this.setUpQuestion();
     }
 
@@ -71,16 +79,6 @@ class Quiz {
             }
         }
         return true;
-    }
-
-    resetQuiz() {
-        this.questions.forEach((question) => {
-            question.answerChoice = undefined;
-        })
-
-        this.score = 0;
-        this.currentQuestion = 0;
-        this.start()
     }
 
     getAnswerChoices() {
@@ -182,7 +180,7 @@ class Quiz {
         this.setUpQuestion();
     }
 
-    setEventListener() {
+    setEventListeners() {
         let answerContainer = document.querySelector("#answerDisplay");
         answerContainer.addEventListener("click", this.answerClicked);
 
@@ -192,5 +190,17 @@ class Quiz {
         let nextBtn = document.querySelector("#nextBtn");
         nextBtn.addEventListener("click", this.nextQuestion);
     }
+
+    removeEventListeners() {
+        let answerContainer = document.querySelector("#answerDisplay");
+        answerContainer.removeEventListener("click", this.answerClicked);
+
+        let previousBtn = document.querySelector("#previousBtn");
+        previousBtn.removeEventListener("click", this.previousQuestion);
+
+        let nextBtn = document.querySelector("#nextBtn");
+        nextBtn.removeEventListener("click", this.nextQuestion);
+    }
+
     // End of Event Handlers ****************************************
 }
