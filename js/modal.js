@@ -36,6 +36,6 @@ $(document).ready(function () {
 
     $('#quizCompleted').on('hide.bs.modal', function (e) {
         document.querySelector("#resetContainer")
-            .innerHTML = `<button type="button" class="btn btn-outline-dark w-100" data-click="resetQuiz">Reset</button>`;
+            .innerHTML = `<button type="button" class="btn btn-outline-light mb-2 w-100" data-click="resetQuiz">Reset</button>`;
     });
 });

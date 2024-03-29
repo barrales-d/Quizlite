@@ -23,6 +23,17 @@ function showMessage(msg, type) {
     fadeInOutAnimation(feedbackContainer);
 }
 
+// copied from: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+/* Randomize array in-place using Durstenfeld shuffle algorithm */
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
 class Quiz {
     // questions should be an array of objects
     // each object should be a question object in this format:
@@ -42,6 +53,8 @@ class Quiz {
         this.questions.forEach((question) => {
             question.answerChoice = undefined;
         })
+
+        shuffleArray(this.questions);
 
         this.score = 0;
         this.currentQuestion = 0;
@@ -105,6 +118,7 @@ class Quiz {
         let answersHTML = "<div class='row'>";
 
         let answers = this.questions[this.currentQuestion].possibleAnswers;
+        let answersArray = [];
         answers.forEach((answer, index) => {
             let color = "primary";
             let disabled = false;
@@ -119,15 +133,20 @@ class Quiz {
                 disabled = true;
             }
 
-            answersHTML +=
+            answersArray.push(
                 `<div class="col-6">
-                <button class="btn btn-${(userChoice == index) ? color : "primary"} m-1 px-4 py-3 w-100"
+                    <button class="btn btn-${(userChoice == index) ? color : "primary"} m-1 px-4 py-3 w-100"
                     type="button" data-choice="${index}" ${(disabled) ? "disabled" : ""}>
                     ${answer}
-                </button>
-            </div>`;
-
+                    </button>
+                </div>`
+            );
         });
+
+        shuffleArray(answersArray);
+
+        answersHTML += answersArray.join("");
+
         answersHTML += "</div>";
 
         document.querySelector("#answerDisplay").innerHTML = answersHTML;

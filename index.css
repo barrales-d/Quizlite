@@ -1,3 +1,8 @@
+body {
+    height: 100vh;
+    background: linear-gradient(145deg, #38EF7D, #11998E, #4E65FF, #92EFFD) no-repeat;    
+}
+
 /* used to give the  `<`, `>` icons the bootstrap colors  */
 svg {
     color: inherit;
@@ -12,6 +17,11 @@ svg {
     cursor: pointer;
 }
 
+.multi-color {
+    background: linear-gradient(150deg, #38EF7D, #11998E) no-repeat;
+    background-clip: text;
+    color: transparent;
+}
 @media only screen and (max-width: 40em) {
 
     /* on small screen, it seperates the tabs from the title */
