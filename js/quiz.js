@@ -40,7 +40,6 @@ class Quiz {
     // {
     //     "question": "How are you?",
     //     "possibleAnswers": ["good", "bad", "fine", "ok"],
-    //     "correctAnswer": 0,
     //      "answerChoice" will be defined by the quiz class as the user answer questions
     // }
     constructor(questions) {
@@ -80,10 +79,6 @@ class Quiz {
     }
 
     // Logical Helpers ****************************************
-    getCorrectAnswer() {
-        return this.questions[this.currentQuestion].correctAnswer;
-    }
-
     quizFinished() {
         // quiz finishes when all questions have been answered
         for (let i = 0; i < this.questions.length; i++) {
@@ -125,7 +120,7 @@ class Quiz {
 
             const userChoice = this.questions[this.currentQuestion].answerChoice;
             if (userChoice) {
-                if (this.getCorrectAnswer() == userChoice) {
+                if (userChoice == 0) {
                     color = "success";
                 } else {
                     color = "danger";
@@ -173,7 +168,7 @@ class Quiz {
 
         const choice = event.target.dataset.choice;
 
-        const isCorrect = (parseInt(choice) == this.getCorrectAnswer());
+        const isCorrect = (parseInt(choice) == 0);
         if (isCorrect) {
             showMessage("Correct!", "success");
         } else {
