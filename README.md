@@ -1,6 +1,4 @@
-# CPSC349
-
-## Project 1 - QuizLite!
+# CPSC349 Project 1 - QuizLite!
 
 This project uses HTML, CSS, JavaScript, Bootstrap, and JQuery. I was unsure if I should use a live server/database because I thought this should be a simple project, so I opted not to use them. However, since I did not use them, this project is a **simplistic, one-page** application that only uses JavaScript to handle data and logic. 
 
